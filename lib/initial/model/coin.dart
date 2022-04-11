@@ -41,15 +41,21 @@ class Coin {
   final String status;
   final Map<String, dynamic> mapPrices;
 
+// Precio de la moneda
   String fixPrice(String key) =>
       double.parse(mapPrices[key.toUpperCase()] as String? ?? '0')
           .toStringAsFixed(2);
 
+// Total que tenemos de la moneda
   String totalPrice(String key) =>
       (double.parse(mapPrices[key.toUpperCase()] as String) *
               double.parse(name.split(':')[1]))
           .roundToDouble()
           .toStringAsFixed(2);
+
+// Total que tenemos en la moneda para imprimir
+  String totalPriceString(String key) =>
+      '${ticker.toUpperCase()} ${name.split(':')[1]} - $key ${totalPrice(key)}';
 
   Map<String, dynamic> toJson() => {
         'coin': coin,

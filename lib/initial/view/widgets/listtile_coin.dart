@@ -90,7 +90,7 @@ class ListTileCoin extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Total: USD ${_coin.totalPrice('USD')}',
+                  _coin.totalPriceString('USD'),
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
