@@ -1,7 +1,9 @@
 import 'package:challenge_03/initial/model/coin.dart';
 import 'package:challenge_03/repository/cripto_repository.dart';
 import 'package:challenge_03/routes/route_names.dart';
+import 'package:challenge_03/services/coin_list_service.dart';
 import 'package:challenge_03/util/preferences.dart';
+import 'package:challenge_03/util/setup.dart';
 import 'package:flutter/material.dart';
 
 class AddCriptoProvider extends ChangeNotifier {
@@ -10,6 +12,9 @@ class AddCriptoProvider extends ChangeNotifier {
   }) : criptoRepository = repository {
     getCoinsList();
   }
+
+  final _coinListService = service<CoinListService>();
+
   final CriptoRepository criptoRepository;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _textController = TextEditingController();
@@ -40,22 +45,25 @@ class AddCriptoProvider extends ChangeNotifier {
 
   List<Coin> get listCoins => _listCoins;
 
+  bool _gettingCoins = false;
+
+  bool get gettingCoins => _gettingCoins;
+
   /// Obtener lista de criptomonedas
   Future<void> getCoinsList() async {
-    final List<String> _listCoinsName = await criptoRepository.getCoinsList();
+    _gettingCoins = true;
+    notifyListeners();
+    final List<Coin> _listCoins = _coinListService.coinList;
     final List<String> _list =
         _prefs.coins.map((e) => e.split(':')[0]).toList();
 
-    for (final coinName in _listCoinsName) {
+    for (final coin in _listCoins) {
       // Muestro solo las que no tengo en favoritos
-      if (!_list.contains(coinName.split(':')[0])) {
-        final Coin? coin = await criptoRepository.getCoinPrice(coinName);
-        if (coin != null) {
-          _listCoins.add(coin);
-          _listCoinsFiltered.add(coin);
-        }
+      if (!_list.contains(coin.name)) {
+        _listCoinsFiltered.add(coin);
       }
     }
+    _gettingCoins = false;
     notifyListeners();
   }
 

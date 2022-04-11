@@ -24,27 +24,31 @@ class AddCriptoView extends StatelessWidget {
           ),
           backgroundColor: const Color(0xFF19152e),
           body: Consumer<AddCriptoProvider>(
-            builder: (context, vm, child) => vm.listCoins.isEmpty
+            builder: (context, vm, child) => vm.gettingCoins
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : Column(
-                    children: [
-                      SearchBox(
-                        controller: vm.searchController,
-                        onChanged: vm.filterListCoins,
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: _buildListCoins(
-                            listCoins: vm.listCoinsFiltered,
-                            controller: vm.textController,
-                            addCoinToPreferences: vm.addCoinToPreferences,
+                : vm.listCoinsFiltered.isEmpty
+                    ? const Center(
+                        child: Text('No hay criptomonedas para agregar'),
+                      )
+                    : Column(
+                        children: [
+                          SearchBox(
+                            controller: vm.searchController,
+                            onChanged: vm.filterListCoins,
                           ),
-                        ),
+                          Expanded(
+                            child: Container(
+                              child: _buildListCoins(
+                                listCoins: vm.listCoinsFiltered,
+                                controller: vm.textController,
+                                addCoinToPreferences: vm.addCoinToPreferences,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
           ),
         ),
       ),

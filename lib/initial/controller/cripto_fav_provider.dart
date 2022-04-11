@@ -1,6 +1,8 @@
 import 'package:challenge_03/initial/model/coin.dart';
 import 'package:challenge_03/repository/cripto_repository.dart';
+import 'package:challenge_03/services/coin_list_service.dart';
 import 'package:challenge_03/util/preferences.dart';
+import 'package:challenge_03/util/setup.dart';
 import 'package:flutter/widgets.dart';
 
 class CriptoFavProvider extends ChangeNotifier {
@@ -14,6 +16,8 @@ class CriptoFavProvider extends ChangeNotifier {
   final _prefs = Preferences();
   final List<String> _favCoinsNames = [];
 
+  final _coinListService = service<CoinListService>();
+
   List<Coin> get favCoins => _favCoins;
   bool isFav(Coin coin) => _favCoins.contains(coin);
   bool _gettingFavCoins = false;
@@ -22,11 +26,20 @@ class CriptoFavProvider extends ChangeNotifier {
   Future<void> getCoinsList() async {
     _gettingFavCoins = true;
     notifyListeners();
+    if (_coinListService.coinList.isEmpty) {
+      await _coinListService.getCoinsList();
+    }
+
     _favCoinsNames.clear();
     print(_prefs.coins);
     _favCoinsNames.addAll(_prefs.coins);
     for (final coinName in _favCoinsNames) {
-      final Coin? coin = await criptoRepository.getCoinPrice(coinName);
+      final Coin coin = _coinListService.coinList
+          .firstWhere((e) => e.name == coinName.split(':')[0])
+          .copyWith(
+            name: coinName,
+          );
+
       if (coin != null) {
         _favCoins.add(coin);
       }

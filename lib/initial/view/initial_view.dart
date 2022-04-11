@@ -69,8 +69,7 @@ class InitialView extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.only(top: 10),
           decoration: BoxDecoration(
-            color:
-                Colors.white.withOpacity(.8), // Your desired background color
+            color: Colors.white.withOpacity(.8),
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(

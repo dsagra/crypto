@@ -8,7 +8,7 @@ class CriptoRepository {
   }) : _dio = dio;
   final Dio _dio;
 
-  // Future<List<String>> getCoinsNameListFromApi() async {
+  // Future<List<String>> getCoinsListFromApi() async {
   //   try {
   //     final List<String> _listado = [];
   //     final List<Coin?> _listadoCoins = [];

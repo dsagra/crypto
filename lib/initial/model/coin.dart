@@ -25,8 +25,35 @@ class Coin {
         minimumFeeCoin: json['minimum_fee_coin'] as String? ?? '',
         feePercent: json['fee_percent'] as String? ?? '',
         status: json['status'] as String? ?? '',
-        // prices: Prices.fromJson(json['prices'] as Map<String, dynamic>),
         mapPrices: (json['prices'] ?? {}) as Map<String, dynamic>,
+      );
+
+  Coin copyWith({
+    String? coin,
+    String? logo,
+    String? ticker,
+    int? minimumTransaction,
+    String? minimumTransactionCoin,
+    int? minimumFee,
+    String? minimumFeeCoin,
+    String? feePercent,
+    String? status,
+    Map<String, dynamic>? mapPrices,
+    String? name,
+  }) =>
+      Coin(
+        coin: coin ?? this.coin,
+        logo: logo ?? this.logo,
+        ticker: ticker ?? this.ticker,
+        minimumTransaction: minimumTransaction ?? this.minimumTransaction,
+        minimumTransactionCoin:
+            minimumTransactionCoin ?? this.minimumTransactionCoin,
+        minimumFee: minimumFee ?? this.minimumFee,
+        minimumFeeCoin: minimumFeeCoin ?? this.minimumFeeCoin,
+        feePercent: feePercent ?? this.feePercent,
+        status: status ?? this.status,
+        mapPrices: mapPrices ?? this.mapPrices,
+        name: name ?? this.name,
       );
 
   final String coin;
