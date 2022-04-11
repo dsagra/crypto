@@ -19,9 +19,6 @@ class ListCoins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _priceDouble = double.parse(_coin.prices.usd);
-    final String _price = _priceDouble.toStringAsFixed(2);
-
     return Container(
       margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
@@ -67,7 +64,7 @@ class ListCoins extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                'USD $_price',
+                'USD ${_coin.fixPrice('USD')}',
                 style: const TextStyle(color: Colors.black),
               ),
             ],

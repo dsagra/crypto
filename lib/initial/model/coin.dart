@@ -10,7 +10,7 @@ class Coin {
     required this.minimumFeeCoin,
     required this.feePercent,
     required this.status,
-    required this.prices,
+    required this.mapPrices,
   });
 
   factory Coin.fromJson(Map<String, dynamic> json, String name) => Coin(
@@ -25,7 +25,8 @@ class Coin {
         minimumFeeCoin: json['minimum_fee_coin'] as String? ?? '',
         feePercent: json['fee_percent'] as String? ?? '',
         status: json['status'] as String? ?? '',
-        prices: Prices.fromJson(json['prices'] as Map<String, dynamic>),
+        // prices: Prices.fromJson(json['prices'] as Map<String, dynamic>),
+        mapPrices: (json['prices'] ?? {}) as Map<String, dynamic>,
       );
 
   final String coin;
@@ -38,7 +39,17 @@ class Coin {
   final String minimumFeeCoin;
   final String feePercent;
   final String status;
-  final Prices prices;
+  final Map<String, dynamic> mapPrices;
+
+  String fixPrice(String key) =>
+      double.parse(mapPrices[key.toUpperCase()] as String? ?? '0')
+          .toStringAsFixed(2);
+
+  String totalPrice(String key) =>
+      (double.parse(mapPrices[key.toUpperCase()] as String) *
+              double.parse(name.split(':')[1]))
+          .roundToDouble()
+          .toStringAsFixed(2);
 
   Map<String, dynamic> toJson() => {
         'coin': coin,
@@ -50,102 +61,5 @@ class Coin {
         'minimum_fee_coin': minimumFeeCoin,
         'fee_percent': feePercent,
         'status': status,
-        'prices': prices.toJson(),
-      };
-}
-
-class Prices {
-  Prices({
-    required this.usd,
-    required this.eur,
-    required this.gbp,
-    required this.cad,
-    required this.jpy,
-    required this.aed,
-    required this.dkk,
-    required this.brl,
-    required this.cny,
-    required this.hkd,
-    required this.inr,
-    required this.mxn,
-    required this.ugx,
-    required this.pln,
-    required this.php,
-    required this.czk,
-    required this.huf,
-    required this.bgn,
-    required this.ron,
-    required this.lkr,
-    required this.pricesTry,
-  });
-
-  factory Prices.fromJson(Map<String, dynamic> json) => Prices(
-        usd: json['USD'] as String,
-        eur: json['EUR'] as String,
-        gbp: json['GBP'] as String,
-        cad: json['CAD'] as String,
-        jpy: json['JPY'] as String,
-        aed: json['AED'] as String,
-        dkk: json['DKK'] as String,
-        brl: json['BRL'] as String,
-        cny: json['CNY'] as String,
-        hkd: json['HKD'] as String,
-        inr: json['INR'] as String,
-        mxn: json['MXN'] as String,
-        ugx: json['UGX'] as String,
-        pln: json['PLN'] as String,
-        php: json['PHP'] as String,
-        czk: json['CZK'] as String,
-        huf: json['HUF'] as String,
-        bgn: json['BGN'] as String,
-        ron: json['RON'] as String,
-        lkr: json['LKR'] as String,
-        pricesTry: json['TRY'] as String,
-      );
-
-  final String usd;
-  final String eur;
-  final String gbp;
-  final String cad;
-  final String jpy;
-  final String aed;
-  final String dkk;
-  final String brl;
-  final String cny;
-  final String hkd;
-  final String inr;
-  final String mxn;
-  final String ugx;
-  final String pln;
-  final String php;
-  final String czk;
-  final String huf;
-  final String bgn;
-  final String ron;
-  final String lkr;
-  final String pricesTry;
-
-  Map<String, dynamic> toJson() => {
-        'USD': usd,
-        'EUR': eur,
-        'GBP': gbp,
-        'CAD': cad,
-        'JPY': jpy,
-        'AED': aed,
-        'DKK': dkk,
-        'BRL': brl,
-        'CNY': cny,
-        'HKD': hkd,
-        'INR': inr,
-        'MXN': mxn,
-        'UGX': ugx,
-        'PLN': pln,
-        'PHP': php,
-        'CZK': czk,
-        'HUF': huf,
-        'BGN': bgn,
-        'RON': ron,
-        'LKR': lkr,
-        'TRY': pricesTry,
       };
 }

@@ -1,6 +1,7 @@
 import 'package:challenge_03/add_cripto/controller/add_cripto_provider.dart';
 import 'package:challenge_03/initial/controller/cripto_fav_provider.dart';
 import 'package:challenge_03/repository/cripto_repository.dart';
+import 'package:challenge_03/services/coin_list_service.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,6 +22,11 @@ void setup() {
   service.registerFactory<CriptoRepository>(
     () => CriptoRepository(
       dio: Dio(),
+    ),
+  );
+  service.registerSingleton<CoinListService>(
+    CoinListService(
+      repository: service(),
     ),
   );
 }

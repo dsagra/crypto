@@ -1,0 +1,16 @@
+List<String> get coinsList => const [
+      'btc',
+      'eth',
+      'bch',
+      'ltc',
+      'xmr',
+      'erc20/bnb',
+      'erc20/busd',
+      'erc20/link',
+      'erc20/mkr',
+      'erc20/cro',
+      'bep20/ada',
+      'bep20/cake',
+      'bep20/dai',
+      'bep20/doge',
+    ];

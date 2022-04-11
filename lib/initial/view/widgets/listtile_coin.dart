@@ -15,15 +15,6 @@ class ListTileCoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _priceDouble = double.parse(_coin.prices.usd);
-    final String _price = _priceDouble.toStringAsFixed(2);
-    final String _cantidad = _coin.name.split(':')[1];
-
-    final _cantidadDouble = double.parse(_cantidad);
-
-    final String _total =
-        (_cantidadDouble * _priceDouble).roundToDouble().toStringAsFixed(2);
-
     return Dismissible(
       onDismissed: (direction) => _onDelete(_coin),
       confirmDismiss: (direction) async {
@@ -99,14 +90,14 @@ class ListTileCoin extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Total: USD $_total',
+                  'Total: USD ${_coin.totalPrice('USD')}',
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Precio: USD $_price',
+                  'Precio: USD ${_coin.fixPrice('USD')}',
                   style: const TextStyle(color: Colors.black),
                 ),
               ],

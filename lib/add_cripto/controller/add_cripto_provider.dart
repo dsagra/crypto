@@ -42,8 +42,7 @@ class AddCriptoProvider extends ChangeNotifier {
 
   /// Obtener lista de criptomonedas
   Future<void> getCoinsList() async {
-    final List<String> _listCoinsName =
-        await criptoRepository.getCoinsNameList();
+    final List<String> _listCoinsName = await criptoRepository.getCoinsList();
     final List<String> _list =
         _prefs.coins.map((e) => e.split(':')[0]).toList();
 
@@ -75,10 +74,4 @@ class AddCriptoProvider extends ChangeNotifier {
       Navigator.pushNamed(context, initialViewRoute);
     }
   }
-
-  /// Trae el precio de cada criptomoneda
-  // Future<Coin> getCoinPrice(String coinName) async {
-  //   final Coin coin = await criptoRepository.getCoinPrice(coinName);
-  //   return coin;
-  // }
 }
