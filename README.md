@@ -1,3 +1,23 @@
+# CHALLENGE CRIPTOMONEDAS PARA 42i
+
+App en Flutter para llevar el listado de tus criptomonedas favoritas.
+
+- Listado de tus criptomonedas favoritas y su cantidad.
+
+- Posibilidad de ver tus criptomonedas en las diferentes divisas
+
+## Caracteristicas Técnicas
+
+- Flutter 2.10.3
+
+- Estructura de datos MVC
+
+- Manejador de estados: provider
+
+- Separacion en capas: UI, Provider, Servicios y Repositorio que conecta con la API.
+
+- Api utilizada: <https://cryptapi.io>
+
 # 03 Fav Crypto List
 
 El challenge consiste en armar una app chica en flutter para llevar el listado del precio de tus cryptomonedas favoritas.

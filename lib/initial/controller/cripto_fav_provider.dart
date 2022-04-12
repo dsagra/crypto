@@ -16,6 +16,14 @@ class CriptoFavProvider extends ChangeNotifier {
   final _prefs = Preferences();
   final List<String> _favCoinsNames = [];
 
+  String _currency = 'USD';
+  String get currency => _currency;
+
+  void setCurrency(String? currency) {
+    _currency = currency!;
+    notifyListeners();
+  }
+
   final _coinListService = service<CoinListService>();
 
   List<Coin> get favCoins => _favCoins;
@@ -31,7 +39,6 @@ class CriptoFavProvider extends ChangeNotifier {
     }
 
     _favCoinsNames.clear();
-    print(_prefs.coins);
     _favCoinsNames.addAll(_prefs.coins);
     for (final coinName in _favCoinsNames) {
       final Coin coin = _coinListService.coinList

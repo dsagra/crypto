@@ -6,12 +6,15 @@ class ListTileCoin extends StatelessWidget {
     Key? key,
     required Coin coin,
     required Function onDelete,
+    required String currency,
   })  : _onDelete = onDelete,
+        _currency = currency,
         _coin = coin,
         super(key: key);
 
   final Coin _coin;
   final Function _onDelete;
+  final String _currency;
 
   @override
   Widget build(BuildContext context) {
@@ -90,14 +93,14 @@ class ListTileCoin extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  _coin.totalPriceString('USD'),
+                  _coin.totalPriceString(_currency),
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Precio: USD ${_coin.fixPrice('USD')}',
+                  'Precio: $_currency ${_coin.fixPrice(_currency)}',
                   style: const TextStyle(color: Colors.black),
                 ),
               ],

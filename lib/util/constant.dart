@@ -14,3 +14,27 @@ List<String> get coinsList => const [
       'bep20/dai',
       'bep20/doge',
     ];
+
+List<String> get currencyList => const [
+      'USD',
+      'EUR',
+      'GBP',
+      'CAD',
+      'JPY',
+      'AED',
+      'DKK',
+      'BRL',
+      'CNY',
+      'HKD',
+      'INR',
+      'MXN',
+      'UGX',
+      'PLN',
+      'PHP',
+      'CZK',
+      'HUF',
+      'BGN',
+      'RON',
+      'LKR',
+      'TRY'
+    ];

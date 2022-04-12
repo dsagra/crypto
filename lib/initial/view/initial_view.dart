@@ -2,6 +2,7 @@ import 'package:challenge_03/app/view/widgets/custom_appbar.dart';
 import 'package:challenge_03/initial/controller/cripto_fav_provider.dart';
 import 'package:challenge_03/initial/model/coin.dart';
 import 'package:challenge_03/routes/route_names.dart';
+import 'package:challenge_03/util/constant.dart';
 import 'package:challenge_03/util/setup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +23,44 @@ class InitialView extends StatelessWidget {
           backgroundColor: const Color(0xFF19152e),
           appBar: const CustomAppBar(),
           body: Consumer<CriptoFavProvider>(
-            builder: (context, vm, child) => _buildListCrypoFav(
-              coinsList: vm.favCoins,
-              onDelete: vm.removeCoin,
-              gettingFavCoins: vm.gettingFavCoins,
+            builder: (context, vm, child) => Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                        'Divisa',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      DropdownButton<String>(
+                        value: vm.currency,
+                        items: currencyList.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: vm.setCurrency,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: _buildListCrypoFav(
+                    coinsList: vm.favCoins,
+                    onDelete: vm.removeCoin,
+                    currency: vm.currency,
+                    gettingFavCoins: vm.gettingFavCoins,
+                  ),
+                ),
+              ],
             ),
           ),
           floatingActionButton: FloatingActionButton(
@@ -45,6 +80,7 @@ class InitialView extends StatelessWidget {
     required List<Coin> coinsList,
     required Function onDelete,
     required bool gettingFavCoins,
+    required String currency,
   }) {
     if (gettingFavCoins) {
       return const Center(
@@ -81,6 +117,7 @@ class InitialView extends StatelessWidget {
           child: ListTileCoin(
             coin: coin,
             onDelete: onDelete,
+            currency: currency,
           ),
         );
       },
