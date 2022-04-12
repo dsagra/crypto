@@ -102,11 +102,15 @@ class ListTileCoin extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
                 ),
                 Text(
                   'Precio: $_currency ${_coin.fixPrice(_currency)}',
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
                 ),
               ],
             ),

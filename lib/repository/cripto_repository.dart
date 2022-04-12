@@ -1,5 +1,4 @@
 import 'package:challenge_03/initial/model/coin.dart';
-import 'package:challenge_03/util/constant.dart';
 import 'package:dio/dio.dart';
 
 class CriptoRepository {
@@ -14,7 +13,6 @@ class CriptoRepository {
       final List<Coin> _listadoCoins = [];
       Coin? _coin;
       final response = await _dio.get('https://api.cryptapi.io/info/');
-      print(response.data);
       response.data.forEach((key, value) {
         if (key == 'erc20' || key == 'bep20' || key == 'trc20') {
           value.forEach((key2, value) {
@@ -37,26 +35,6 @@ class CriptoRepository {
       return _listadoCoins;
     } catch (e) {
       rethrow;
-    }
-  }
-
-  Future<List<String>> getCoinsList() async {
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-      return coinsList;
-    } catch (e) {
-      print(e);
-      return [];
-    }
-  }
-
-  Future<Coin?> getCoinPrice(String coin) async {
-    try {
-      final response =
-          await _dio.get('https://api.cryptapi.io/${coin.split(':')[0]}/info/');
-      return Coin.fromJson(response.data as Map<String, dynamic>, coin);
-    } catch (e) {
-      return null;
     }
   }
 }

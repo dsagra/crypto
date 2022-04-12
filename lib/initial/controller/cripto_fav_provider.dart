@@ -34,9 +34,7 @@ class CriptoFavProvider extends ChangeNotifier {
   Future<void> getCoinsList() async {
     _gettingFavCoins = true;
     notifyListeners();
-    if (_coinListService.coinList.isEmpty) {
-      await _coinListService.getCoinsList();
-    }
+    await _coinListService.getCoinsList();
 
     _favCoinsNames.clear();
     _favCoinsNames.addAll(_prefs.coins);

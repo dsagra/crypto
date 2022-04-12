@@ -4,9 +4,9 @@ App en Flutter para llevar el listado de tus criptomonedas favoritas.
 
 - Listado de tus criptomonedas favoritas, su cantidad y precio.
 
-- Buscador de criptomonedas.
+- Posibilidad de ver tus criptomonedas en las diferentes divisas.
 
-- Posibilidad de ver tus criptomonedas en las diferentes divisas
+- Buscador de criptomonedas.
 
 - Listado de Criptomonedas se genera dinamicamente desde la API.
 
