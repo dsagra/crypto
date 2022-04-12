@@ -41,11 +41,16 @@ class ListCoins extends StatelessWidget {
           _addCoinToPreferences,
         ),
         child: ListTile(
-          leading: Image.network(
-            _coin.logo,
-            width: 40,
-            height: 40,
-          ),
+          leading: (_coin.logo != '')
+              ? Image.network(
+                  _coin.logo,
+                  width: 40,
+                  height: 40,
+                )
+              : Container(
+                  width: 40,
+                  height: 40,
+                ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

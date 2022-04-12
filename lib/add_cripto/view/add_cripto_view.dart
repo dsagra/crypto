@@ -28,7 +28,7 @@ class AddCriptoView extends StatelessWidget {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : vm.listCoinsFiltered.isEmpty
+                : vm.listCoins.isEmpty
                     ? const Center(
                         child: Text('No hay criptomonedas para agregar'),
                       )

@@ -18,27 +18,27 @@ class Coin {
         name: name,
         logo: json['logo'] as String? ?? '',
         ticker: json['ticker'] as String? ?? '',
-        minimumTransaction: json['minimum_transaction'] as int? ?? 0,
+        minimumTransaction: (json['minimum_transaction'] ?? '').toString(),
         minimumTransactionCoin:
             json['minimum_transaction_coin'] as String? ?? '',
-        minimumFee: json['minimum_fee'] as int? ?? 0,
+        minimumFee: (json['minimum_fee'] ?? '').toString(),
         minimumFeeCoin: json['minimum_fee_coin'] as String? ?? '',
         feePercent: json['fee_percent'] as String? ?? '',
         status: json['status'] as String? ?? '',
-        mapPrices: (json['prices'] ?? {}) as Map<String, dynamic>,
+        mapPrices: (json['prices'] ?? {}) as Map<dynamic, dynamic>,
       );
 
   Coin copyWith({
     String? coin,
     String? logo,
     String? ticker,
-    int? minimumTransaction,
+    String? minimumTransaction,
     String? minimumTransactionCoin,
-    int? minimumFee,
+    String? minimumFee,
     String? minimumFeeCoin,
     String? feePercent,
     String? status,
-    Map<String, dynamic>? mapPrices,
+    Map<dynamic, dynamic>? mapPrices,
     String? name,
   }) =>
       Coin(
@@ -60,13 +60,13 @@ class Coin {
   final String name;
   final String logo;
   final String ticker;
-  final int minimumTransaction;
+  final String minimumTransaction;
   final String minimumTransactionCoin;
-  final int minimumFee;
+  final String minimumFee;
   final String minimumFeeCoin;
   final String feePercent;
   final String status;
-  final Map<String, dynamic> mapPrices;
+  final Map<dynamic, dynamic> mapPrices;
 
 // Precio de la moneda
   String fixPrice(String key) =>

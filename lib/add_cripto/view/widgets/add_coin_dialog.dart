@@ -30,11 +30,17 @@ class AddCoinDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.network(
-                    _coin.logo,
-                    width: 40,
-                    height: 40,
-                  ),
+                  if (_coin.logo != '')
+                    Image.network(
+                      _coin.logo,
+                      width: 40,
+                      height: 40,
+                    )
+                  else
+                    Container(
+                      width: 40,
+                      height: 40,
+                    ),
                   const SizedBox(
                     width: 10,
                   ),

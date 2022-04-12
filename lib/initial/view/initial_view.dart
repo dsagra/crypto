@@ -40,6 +40,10 @@ class InitialView extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       DropdownButton<String>(
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                         value: vm.currency,
                         items: currencyList.map((String value) {
                           return DropdownMenuItem<String>(

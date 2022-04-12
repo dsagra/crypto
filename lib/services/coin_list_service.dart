@@ -13,14 +13,15 @@ class CoinListService {
   List<Coin> get coinList => _coinList;
 
   Future<void> getCoinsList() async {
-    final List<Coin> coins = [];
-    final List<String> coinsNames = await criptoRepository.getCoinsList();
-    for (final coinName in coinsNames) {
-      final Coin? coin = await criptoRepository.getCoinPrice(coinName);
-      if (coin != null) {
-        coins.add(coin);
-      }
-    }
+    final List<Coin> coins = await criptoRepository.getCoinsListFromApi();
+
+    // final List<String> coinsNames = await criptoRepository.getCoinsList();
+    // for (final coinName in coinsNames) {
+    //   final Coin? coin = await criptoRepository.getCoinPrice(coinName);
+    //   if (coin != null) {
+    //     coins.add(coin);
+    //   }
+    // }
     _coinList.clear();
     _coinList.addAll(coins);
   }

@@ -40,7 +40,7 @@ class AddCriptoProvider extends ChangeNotifier {
 
   TextEditingController get searchController => _searchController;
 
-  final List<Coin> _listCoins = [];
+  List<Coin> _listCoins = [];
   final _prefs = Preferences();
 
   List<Coin> get listCoins => _listCoins;
@@ -53,7 +53,7 @@ class AddCriptoProvider extends ChangeNotifier {
   Future<void> getCoinsList() async {
     _gettingCoins = true;
     notifyListeners();
-    final List<Coin> _listCoins = _coinListService.coinList;
+    _listCoins = _coinListService.coinList;
     final List<String> _list =
         _prefs.coins.map((e) => e.split(':')[0]).toList();
 
