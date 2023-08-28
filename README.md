@@ -1,4 +1,4 @@
-# CHALLENGE CRIPTOMONEDAS PARA 42i
+# CHALLENGE CRIPTOMONEDAS
 
 App en Flutter para llevar el listado de tus criptomonedas favoritas.
 
